@@ -8,5 +8,3 @@ Also, this is my first project using React, Vite and Tailwind together.
 ### Preview Image
 
 ![Mobile Design](./src/assets/design.png)
-
-### [Preview Link]()
