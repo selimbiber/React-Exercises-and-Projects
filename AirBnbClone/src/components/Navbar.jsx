@@ -10,7 +10,7 @@ export default function Navbar() {
             rel="noreferrer"
           >
             <img
-              src="../public/assets/airbnb-logo.png"
+              src="../assets/airbnb-logo.png"
               alt="airbnb logo"
               className="h-12 w-28"
             />
