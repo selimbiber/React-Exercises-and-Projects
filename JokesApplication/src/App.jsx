@@ -11,7 +11,7 @@ export default function App() {
   return (
     <section
       aria-label="jokes list"
-      className="flex flex-col items-center max-h-screen p-10 bg-yellow-200 gap-y-5"
+      className="flex flex-col items-center max-h-screen p-10 gap-y-5"
     >
       <Header />
       <ul className="flex flex-col h-screen gap-y-5">{jokes}</ul>
