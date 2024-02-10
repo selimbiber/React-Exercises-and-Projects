@@ -2,10 +2,14 @@
 export default function MainContent(props) {
   const colorMode = props.darkMode ? "dark" : "light";
   return (
-    <section className={`bg-[#282D35] h-screen ${colorMode}`}>
+    <section
+      className={`${props.darkMode ? "bg-[#282D35]" : "bg-white"} h-screen ${colorMode}`}
+    >
       <div className="max-w-[768px] mx-auto p-5 flex flex-col gap-y-6">
-        <h3 className="text-3xl font-bold text-white">Fun facts about React</h3>
-        <ul className="flex flex-col pl-4 text-sm text-white gap-y-4">
+        <h3 className="text-3xl font-bold text-[#282D35] dark:text-white">
+          Fun facts about React
+        </h3>
+        <ul className="flex flex-col pl-4 text-sm text-[#282D35] dark:text-white gap-y-4">
           <li
             className="no-list flex items-center gap-x-2 leading-tight before:block 
                 before:h-2 before:w-2 before:bg-[#61DAFB] before:rounded-full

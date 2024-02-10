@@ -2,7 +2,10 @@
 export default function Navbar(props) {
   const colorMode = props.darkMode ? "dark" : "light";
   return (
-    <header className={`bg-[#21222A] ${colorMode}`}>
+    <header
+      className={`${props.darkMode ? "bg-[#21222A]" : "bg-white"} 
+      ${colorMode} shadow-inner shadow-[#21222A]`}
+    >
       <div className="max-w-[768px] mx-auto p-5 flex justify-between items-center">
         <nav className="flex items-center gap-x-2">
           <img
@@ -14,7 +17,10 @@ export default function Navbar(props) {
         </nav>
         <div className="flex items-center gap-x-2">
           <h2>
-            <a href="#" className="text-lg text-white no-underline hover:underline">
+            <a
+              href="#"
+              className="text-lg no-underline hover:underline text-[#21222A] dark:text-white"
+            >
               React Course - Project 1
             </a>
           </h2>
