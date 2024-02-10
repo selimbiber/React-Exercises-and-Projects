@@ -1,8 +1,10 @@
-export default function Navbar() {
+/* eslint-disable react/prop-types */
+export default function Navbar(props) {
+  const colorMode = props.darkMode ? "dark" : "light";
   return (
-    <header className="bg-[#21222A]">
+    <header className={`bg-[#21222A] ${colorMode}`}>
       <div className="max-w-[768px] mx-auto p-5 flex justify-between items-center">
-        <nav className="flex gap-x-2 items-center">
+        <nav className="flex items-center gap-x-2">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/539px-React-icon.svg.png"
             alt="react logo"
@@ -10,11 +12,39 @@ export default function Navbar() {
           />
           <h1 className="text-[#61DBFB] text-3xl font-bold">ReactFacts </h1>
         </nav>
-        <h2>
-          <a href="#" className="no-underline text-white text-lg hover:underline">
-            React Course - Project 1
-          </a>
-        </h2>
+        <div className="flex items-center gap-x-2">
+          <h2>
+            <a href="#" className="text-lg text-white no-underline hover:underline">
+              React Course - Project 1
+            </a>
+          </h2>
+          <button
+            type="button"
+            onClick={props.toggleDarkMode}
+            className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+          >
+            <svg
+              className="hidden w-5 h-5 dark:block"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg
+              className="block w-5 h-5 dark:hidden"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                fillRule="evenodd"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
   );
