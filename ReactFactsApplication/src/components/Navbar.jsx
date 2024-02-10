@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 export default function Navbar(props) {
-  const colorMode = props.darkMode ? "dark" : "light";
+  const colorMode = props.darkMode ? "dark" : "";
   return (
     <header
       className={`${props.darkMode ? "bg-[#21222A]" : "bg-white"} 
@@ -30,7 +30,7 @@ export default function Navbar(props) {
             className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
           >
             <svg
-              className="hidden w-5 h-5 dark:block"
+              className="block w-5 h-5 dark:hidden"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ export default function Navbar(props) {
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
             </svg>
             <svg
-              className="block w-5 h-5 dark:hidden"
+              className="hidden w-5 h-5 dark:block"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"

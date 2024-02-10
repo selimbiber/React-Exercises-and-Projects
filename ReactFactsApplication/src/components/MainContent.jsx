@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 export default function MainContent(props) {
-  const colorMode = props.darkMode ? "dark" : "light";
+  const colorMode = props.darkMode ? "dark" : "";
   return (
     <section
       className={`${props.darkMode ? "bg-[#282D35]" : "bg-white"} h-screen ${colorMode}`}
