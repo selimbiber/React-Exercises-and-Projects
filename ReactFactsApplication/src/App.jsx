@@ -4,11 +4,27 @@ import Navbar from "./components/Navbar";
 import "./index.css";
 
 function App() {
-  const [darkMode, setDarkMode] = React.useState(false);
+  const [darkMode, setDarkMode] = React.useState(true);
 
   function toggleDarkMode() {
-    setDarkMode((prevDarkMode) => !prevDarkMode);
+    setDarkMode((prevDarkMode) => {
+      const newDarkMode = !prevDarkMode;
+      localStorage.theme = newDarkMode ? "dark" : "light";
+      return newDarkMode;
+    });
   }
+
+  React.useEffect(() => {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  }, []);
 
   return (
     <div className="max-h-screen flex flex-col mt-auto font-[inter]">

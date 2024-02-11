@@ -4,9 +4,9 @@ export default function Navbar(props) {
   return (
     <header
       className={`${props.darkMode ? "bg-[#21222A]" : "bg-white"} 
-      ${colorMode} shadow-inner shadow-[#21222A]`}
+      ${colorMode} drop-shadow-lg shadow-[#21222A]`}
     >
-      <div className="max-w-[768px] mx-auto p-5 flex justify-between items-center">
+      <div className="max-w-[768px] mx-auto p-5 flex justify-center items-center w-full flex-wrap basis-auto gap-x-28 gap-y-6 sm:justify-between">
         <nav className="flex items-center gap-x-2">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/539px-React-icon.svg.png"
