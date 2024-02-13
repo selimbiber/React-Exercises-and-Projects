@@ -14,5 +14,5 @@
 
 ![AirBnbClone_DesktopDesign](https://github.com/selimbiber/React-Exercises-and-Projects/assets/117529414/5c546fee-ab90-4884-8656-09a7b5a9ecf3)
 
-## [Preview Link](https://react-exercises-and-projects.vercel.app/)
+## [Preview Link](https://airbnb-clone-selimbibers-projects.vercel.app/)
 
