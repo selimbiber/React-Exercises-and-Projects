@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import ReactMde from "react-mde";
 import Showdown from "showdown";
@@ -13,7 +14,7 @@ export default function Editor({ currentNote, updateNote }) {
   });
 
   return (
-    <section className="pane editor">
+    <section className="h-screen overflow-y-auto">
       <ReactMde
         value={currentNote.body}
         onChange={updateNote}
@@ -22,8 +23,6 @@ export default function Editor({ currentNote, updateNote }) {
         generateMarkdownPreview={(markdown) =>
           Promise.resolve(converter.makeHtml(markdown))
         }
-        minEditorHeight={80}
-        heightUnits="vh"
       />
     </section>
   );
