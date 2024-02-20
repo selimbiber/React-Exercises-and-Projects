@@ -36,7 +36,7 @@ export default function Todo(props) {
       <input
         type="text"
         value={props.title}
-        onChange={() => props.updateTodo(event, props.id)}
+        onChange={(event) => props.updateTodo(event, props.id)}
         className="w-full p-2 mr-3"
       />
       <button title="Delete" onClick={() => props.deleteTodo(props.id)}>

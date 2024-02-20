@@ -24,6 +24,7 @@ export default function Panel(props) {
               : "border-transparent"
           }`}
           onClick={props.filterUncompletedTodos}
+          disabled={props.unCompletedTodosCount === 0}
         >
           Active
         </button>

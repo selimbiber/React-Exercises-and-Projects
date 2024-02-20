@@ -10,9 +10,15 @@ export default function Form(props) {
         value={props.formValue}
       />
       {props.todosLength !== 0 && (
-        <button type="button" onClick={props.changeCompletionStatusForAllTodos}>
+        <button
+          type="button"
+          onClick={props.changeCompletionStatusForAllTodos}
+          disabled={props.unCompletedTodosCount > 0 && props.completedTodosCount > 0}
+        >
           <svg
-            className="absolute w-5 h-5 left-5 top-5 fill-slate-300"
+            className={`absolute w-5 h-5 left-5 top-5 fill-slate-300 ${
+              props.unCompletedTodosCount === 0 ? "fill-slate-700" : ""
+            }`}
             aria-hidden="true"
             version="1.1"
             id="Layer_1"
