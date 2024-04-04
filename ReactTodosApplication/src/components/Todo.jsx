@@ -37,7 +37,9 @@ export default function Todo(props) {
         type="text"
         value={props.title}
         onChange={(event) => props.updateTodo(event, props.id)}
-        className="w-full p-2 mr-3"
+        className={`w-full p-2 mr-3 ${
+          props.completed && "line-through decoration-red-300 decoration-2 text-gray-400"
+        }`}
       />
       <button title="Delete" onClick={() => props.deleteTodo(props.id)}>
         <svg
