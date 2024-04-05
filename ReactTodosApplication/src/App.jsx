@@ -37,6 +37,21 @@ export default function App() {
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
+
+    moveCompletedTodosToTop();
+  }
+
+  function moveCompletedTodosToTop() {
+    setTodos((prevTodos) => {
+      const completedTodos = prevTodos.filter((todo) => todo.completed);
+      const uncompletedTodos = prevTodos.filter((todo) => !todo.completed);
+      return [...completedTodos, ...uncompletedTodos];
+    });
+    setFilteredTodos((prevFilteredTodos) => {
+      const completedTodos = prevFilteredTodos.filter((todo) => todo.completed);
+      const uncompletedTodos = prevFilteredTodos.filter((todo) => !todo.completed);
+      return [...completedTodos, ...uncompletedTodos];
+    });
   }
 
   function handleFormChange(event) {
