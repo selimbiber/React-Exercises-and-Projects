@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
 export default function Todo(props) {
+  const firstUncompletedTodoStyles = `${
+    props.id === props.firstUncompletedTodoId && "bg-red-300 font-bold"
+  }`;
   const customCheckboxStyles =
     "before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-gray-900/20 bg-gray-900/10 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-green-500 checked:bg-green-500 checked:before:bg-green-500 hover:scale-105 hover:before:opacity-0";
 
   return (
-    <li className="flex justify-between py-1 pl-2 pr-5 bg-white border-b">
+    <li
+      className={`flex justify-between py-1 pl-2 pr-5 bg-white border-b ${firstUncompletedTodoStyles}`}
+    >
       <label className="relative flex items-center p-3 rounded-full cursor-pointer">
         <input
           type="checkbox"
@@ -39,7 +44,7 @@ export default function Todo(props) {
         onChange={(event) => props.updateTodo(event, props.id)}
         className={`w-full p-2 mr-3 ${
           props.completed && "line-through decoration-red-300 decoration-2 text-gray-400"
-        }`}
+        } ${firstUncompletedTodoStyles}`}
       />
       <button title="Delete" onClick={() => props.deleteTodo(props.id)}>
         <svg

@@ -121,6 +121,8 @@ export default function App() {
     localStorage.setItem("filteredTodos", JSON.stringify(filteredTodos));
   }, [todos, activeFilterButton]);
 
+  const firstUncompletedTodoId = todos.find((todo) => !todo.completed)?.id;
+
   const unCompletedTodosCount = todos.filter((todo) => !todo.completed).length;
   const completedTodosCount = todos.filter((todo) => todo.completed).length;
 
@@ -136,6 +138,7 @@ export default function App() {
       updateTodo={updateTodo}
       deleteTodo={deleteTodo}
       changeCompletionStatus={changeCompletionStatus}
+      firstUncompletedTodoId={firstUncompletedTodoId}
     />
   ));
 
