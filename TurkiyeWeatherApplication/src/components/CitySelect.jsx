@@ -8,7 +8,7 @@ export default function CitySelect() {
       name="cities"
       value={city}
       id="cities"
-      className="w-40 border border-black focus:border-2"
+      className="w-48 pl-1 border border-black focus:border-2"
       onChange={(event) => setCity(event.target.value)}
     >
       {cities.map((value) => {

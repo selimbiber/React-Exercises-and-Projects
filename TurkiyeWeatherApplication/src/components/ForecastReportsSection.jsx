@@ -31,7 +31,7 @@ export default function ForecastReports() {
       {!loadingStatus && (
         <>
           <h2 className="text-2xl font-bold text-center">
-            <span className="underline">{city}</span> Forecast Details
+            5 Days Weather Forecast of <span className="underline">{city}</span>
           </h2>
           <ul className="flex flex-wrap justify-center gap-8 my-8">
             {DailyWeatherCards}
