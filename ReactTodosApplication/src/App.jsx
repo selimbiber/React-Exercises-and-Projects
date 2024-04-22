@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { nanoid } from "nanoid";
-import React from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Footer from "./components/Footer";
 import Form from "./components/Form";
 import Header from "./components/Header";
@@ -9,15 +9,15 @@ import Todo from "./components/Todo";
 import "./index.css";
 
 export default function App() {
-  const [formValue, setFormValue] = React.useState("");
+  const [formValue, setFormValue] = useState("");
 
-  const [todos, setTodos] = React.useState(getInitialValues);
+  const [todos, setTodos] = useState(getInitialValues);
 
-  const [filteredTodos, setFilteredTodos] = React.useState(
+  const [filteredTodos, setFilteredTodos] = useState(
     JSON.parse(localStorage.getItem("filteredTodos")) || getInitialValues()
   );
 
-  const [activeFilterButton, setActiveFilterButton] = React.useState(
+  const [activeFilterButton, setActiveFilterButton] = useState(
     JSON.parse(localStorage.getItem("activeFilterButton")) || "allTodos"
   );
 
@@ -54,72 +54,82 @@ export default function App() {
     });
   }
 
-  function handleFormChange(event) {
-    setFormValue(event.target.value);
-  }
+  const handleFormChange = useCallback(
+    (event) => {
+      setFormValue(event.target.value);
+    },
+    [formValue]
+  );
 
-  function createTodo(event) {
-    event.preventDefault();
-    const newTodo = { id: nanoid(), title: formValue, completed: false };
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
-    setFilteredTodos((prevFilteredTodos) => [...prevFilteredTodos, newTodo]);
-    setActiveFilterButton("allTodos");
-    setFormValue("");
-  }
+  const createTodo = useCallback(
+    (event) => {
+      event.preventDefault();
 
-  function deleteTodo(id) {
+      const newTodo = { id: nanoid(), title: formValue, completed: false };
+      setTodos((prevTodos) => [...prevTodos, newTodo]);
+      setFilteredTodos((prevFilteredTodos) => [...prevFilteredTodos, newTodo]);
+      setActiveFilterButton("allTodos");
+      setFormValue("");
+    },
+    [formValue]
+  );
+
+  const deleteTodo = useCallback((id) => {
     setTodos((oldTodos) => oldTodos.filter((todo) => todo.id !== id));
     setFilteredTodos((oldTodos) => oldTodos.filter((todo) => todo.id !== id));
-  }
+  }, []);
 
-  function updateTodo(event, id) {
-    const value = event.target.value;
-    if (value.length === 0) return;
-    setTodos((oldTodos) =>
-      oldTodos.map((todo) => (todo.id === id ? { ...todo, title: value } : todo))
-    );
-    setFilteredTodos((oldTodos) =>
-      oldTodos.map((todo) => (todo.id === id ? { ...todo, title: value } : todo))
-    );
-  }
+  const updateTodo = useCallback(
+    (event, id) => {
+      const value = event.target.value;
+      if (value.length === 0) return;
+      setTodos((oldTodos) =>
+        oldTodos.map((todo) => (todo.id === id ? { ...todo, title: value } : todo))
+      );
+      setFilteredTodos((oldTodos) =>
+        oldTodos.map((todo) => (todo.id === id ? { ...todo, title: value } : todo))
+      );
+    },
+    [todos, filteredTodos]
+  );
 
-  function changeCompletionStatusForAllTodos() {
+  const changeCompletionStatusForAllTodos = useCallback(() => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) => ({ ...todo, completed: !todo.completed }))
     );
     setFilteredTodos((prevTodos) =>
       prevTodos.map((todo) => ({ ...todo, completed: !todo.completed }))
     );
-  }
+  }, []);
 
-  function showAllTodos() {
+  const showAllTodos = useCallback(() => {
     setFilteredTodos(todos);
     setActiveFilterButton("allTodos");
-  }
+  }, [todos]);
 
-  function filterUncompletedTodos() {
+  const filterUncompletedTodos = useCallback(() => {
     const uncompletedTodos = todos.filter((todo) => !todo.completed);
     setFilteredTodos(uncompletedTodos);
     setActiveFilterButton("unCompletedTodos");
-  }
+  }, [todos]);
 
-  function filterCompletedTodos() {
+  const filterCompletedTodos = useCallback(() => {
     const completedTodos = todos.filter((todo) => todo.completed);
     setFilteredTodos(completedTodos);
     setActiveFilterButton("completedTodos");
-  }
+  }, [todos]);
 
-  function deleteAllCompletedTodos() {
+  const deleteAllCompletedTodos = useCallback(() => {
     const uncompletedTodos = todos.filter((todo) => !todo.completed);
     setTodos(uncompletedTodos);
     setFilteredTodos(uncompletedTodos);
-  }
+  }, [todos]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
     localStorage.setItem("activeFilterButton", JSON.stringify(activeFilterButton));
     localStorage.setItem("filteredTodos", JSON.stringify(filteredTodos));
-  }, [todos, activeFilterButton]);
+  }, [todos, activeFilterButton, filteredTodos]);
 
   const firstUncompletedTodoId = todos.find((todo) => !todo.completed)?.id;
 
@@ -129,18 +139,22 @@ export default function App() {
   const staircaseEffectStyles =
     "before:w-[27rem] before:absolute before:-bottom-2 before:border-b before:h-2 before:left-2 before:bg-white after:absolute after:-bottom-4 after:w-[26rem] after:border-b after:border-gray-200 before:border-gray-200 before:z-20 after:h-3 after:left-4 after:bg-white after:z-10";
 
-  const TodoElement = filteredTodos.map((todo) => (
-    <Todo
-      key={todo.id}
-      id={todo.id}
-      title={todo.title}
-      completed={todo.completed}
-      updateTodo={updateTodo}
-      deleteTodo={deleteTodo}
-      changeCompletionStatus={changeCompletionStatus}
-      firstUncompletedTodoId={firstUncompletedTodoId}
-    />
-  ));
+  const TodoElement = useMemo(
+    () =>
+      filteredTodos.map((todo) => (
+        <Todo
+          key={todo.id}
+          id={todo.id}
+          title={todo.title}
+          completed={todo.completed}
+          updateTodo={updateTodo}
+          deleteTodo={deleteTodo}
+          changeCompletionStatus={changeCompletionStatus}
+          firstUncompletedTodoId={firstUncompletedTodoId}
+        />
+      )),
+    [filteredTodos, updateTodo, deleteTodo, changeCompletionStatus]
+  );
 
   return (
     <main className="flex flex-col items-center min-h-screen bg-cyan-200">
